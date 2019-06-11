@@ -87,4 +87,12 @@ class Image extends \yii\db\ActiveRecord
             ->one();
         return $data;
     }
+
+    public function  getImage(){
+        $data = Image::find()
+            ->asArray()
+            ->where(['user_id'=>Yii::$app->user->id,'deleted'=>0])
+            ->all();
+        return $data;
+    }
 }

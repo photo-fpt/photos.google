@@ -5,16 +5,16 @@
 
     .row {
         display: -ms-flexbox;
-    display: flex;
+        display: flex;
         -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+        flex-wrap: wrap;
         padding: 0 4px;
     }
 
     /*/ Create four equal columns that sits next to each other /*/
     .column {
         -ms-flex: 25%;
-    flex: 25%;
+        flex: 25%;
         max-width: 25%;
         padding: 0 4px;
     }
@@ -42,7 +42,10 @@
             max-width: 100%;
         }
     }
-    * {box-sizing: border-box;}
+
+    * {
+        box-sizing: border-box;
+    }
 
     .container {
         position: relative;
@@ -60,10 +63,10 @@
         top: 0;
         background: rgb(0, 0, 0);
         background: rgba(0, 0, 0, 0.2);
-    color: #f1f1f1;
+        color: #f1f1f1;
         width: 100%;
         transition: .5s ease;
-        opacity:0;
+        opacity: 0;
         color: white;
         font-size: 20px;
         padding: 1%;
@@ -75,30 +78,32 @@
     }
 </style>
 <!--style="overflow-x: hidden;"-->
-<body >
+<body>
 <div class="row">
     <?php
     $pss = date_default_timezone_set('Asia/Ho_Chi_Minh');
     //$tomorrow  = mktime(0, 0, 0, date("m")  , date("d")+1, date("Y"));
-    foreach ($image as $key =>$value) {
+    foreach ($image as $key => $value) {
         ?>
         <div class="column " style="padding: 5px">
             <span class="mdc-typography--subtitle2"><?php
-                echo $value["date_create"]." ".$value["location"];
+                echo $value["date_create"] . " " . $value["location"];
                 ?></span>
-            <a href="<?php echo Yii::$app->homeUrl . "image/detail?id=".$value["image_id"]?>">
+            <a href="<?php echo Yii::$app->homeUrl . "image/detail?id=" . $value["image_id"] ?>">
                 <div class="container">
-                    <img src="<?php echo Yii::$app->homeUrl."frontend/web/".$value["path_image"]?>" class="image">
+                    <img src="<?php echo Yii::$app->homeUrl . "frontend/web/" . $value["path_image"] ?>"
+                         class="image">
                     <div class="overlay">
                         <div class="mdc-form-field" style="color: white">
                             <div class="mdc-checkbox">
                                 <input type="checkbox"
                                        class="mdc-checkbox__native-control"
-                                       id="checkbox-1" style="color: white" />
+                                       id="checkbox-1" style="color: white"/>
                                 <div class="mdc-checkbox__background">
                                     <svg class="mdc-checkbox__checkmark"
                                          viewBox="0 0 24 24">
-                                        <path class="mdc-checkbox__checkmark-path" fill="none"  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                        <path class="mdc-checkbox__checkmark-path" fill="none"
+                                              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
                                     </svg>
                                     <div class="mdc-checkbox__mixedmark"></div>
                                 </div>
@@ -113,6 +118,7 @@
     }
     ?>
 </div>
+
 
 <script>
     const checkbox = new MDCCheckbox(document.querySelector('.mdc-checkbox'));

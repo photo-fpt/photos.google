@@ -32,7 +32,7 @@ class headermainWidget extends Widget
                     $date = date('Y-m-d H:i:s');
                     $filename = $name->baseName . '.' . $name->extension;
                     $filepath = $path;
-                    $username = Yii::$app->user->identity->id;
+                    $username = Yii::$app->user->identity->getId();
 //                    echo '<pre>';
 //                    print_r($username);
 //                    die();

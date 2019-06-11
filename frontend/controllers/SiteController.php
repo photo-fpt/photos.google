@@ -22,6 +22,7 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -74,10 +75,18 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+
     public function actionIndex()
     {
-        $data = Image::find()->all();
-        return $this->render('index',['image'=>$data]);
+        if (!Yii::$app->user->isGuest){
+            $data = new Image();
+            $data = $data->getImage();
+            return $this->render('index',['image'=>$data]);
+        }
+        else{
+            $this->layout = 'login';
+            return $this->redirect(Yii::$app->homeUrl.'login');
+        }
     }
 
     /**
@@ -87,6 +96,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout ='login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

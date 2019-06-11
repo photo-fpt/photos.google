@@ -47,7 +47,8 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'login'=>'site/login',
-                ''=>'site/index'
+                ''=>'site/index',
+                'detail?<id:\d+>' => 'detail/image',
             ],
         ],
     ],

@@ -30,40 +30,49 @@ use yii\helpers\Html;
 
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-            <a class="material-icons mdc-top-app-bar__navigation-icon" aria-label="Create" onclick="myFunction()">add_box</a>
+            <a class="material-icons mdc-top-app-bar__navigation-icon" aria-label="Create" onclick="addBox()">add_box</a>
             <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
             <?= $form->field($model, 'image[]')->fileInput(['multiple' => true, 'accept' => 'image/*',
                 'onchange' => 'this.form.submit()', 'style' => 'display:none']) ?>
             <?php ActiveForm::end(); ?>
             <!--            <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Upload" id="btnFileUpload">cloud_upload</a>-->
-            <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="User">account_circle</a>
+            <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="account()">account_circle</a>
         </section>
     </div>
 </header>
+<!--<div class="mdc-menu mdc-menu-surface" id="addbox">-->
+<!--    <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">-->
+<!--        <li>-->
+<!--            <span class="mdc-typography mdc-typography--subtitle2" style="padding-left: 15px;">TẠO MỚI</span>-->
+<!--        </li>-->
+<!--        <li class="mdc-list-item" role="menuitem">-->
+<!--            <div class="material-icons" style="color: blue">collections</div>-->
+<!--            <span class="mdc-list-item__text" style="padding-left: 15px;">Album</span>-->
+<!--        </li>-->
+<!--        <li class="mdc-list-item" role="menuitem">-->
+<!--            <div class="material-icons" style="color: blue">group</div>-->
+<!--            <span class="mdc-list-item__text" style="padding-left: 15px;">Album được chia sẻ</span>-->
+<!--        </li>-->
+<!--        <li class="mdc-list-item" role="menuitem">-->
+<!--            <div class="material-icons" style="color: blue">movie</div>-->
+<!--            <span class="mdc-list-item__text" style="padding-left: 15px;">Phim</span>-->
+<!--        </li>-->
+<!--        <li class="mdc-list-item" role="menuitem">-->
+<!--            <div class="material-icons" style="color: blue">filter_none</div>-->
+<!--            <span class="mdc-list-item__text" style="padding-left: 15px;">Hoạt ảnh</span>-->
+<!--        </li>-->
+<!--        <li class="mdc-list-item" role="menuitem">-->
+<!--            <div class="material-icons" style="color: blue">web</div>-->
+<!--            <span class="mdc-list-item__text" style="padding-left: 15px;">Ảnh ghép</span>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
 <div class="mdc-menu mdc-menu-surface">
     <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-        <li>
-            <span class="mdc-typography mdc-typography--subtitle2" style="padding-left: 15px;">TẠO MỚI</span>
-        </li>
         <li class="mdc-list-item" role="menuitem">
-            <div class="material-icons" style="color: blue">collections</div>
-            <span class="mdc-list-item__text" style="padding-left: 15px;">Album</span>
-        </li>
-        <li class="mdc-list-item" role="menuitem">
-            <div class="material-icons" style="color: blue">group</div>
-            <span class="mdc-list-item__text" style="padding-left: 15px;">Album được chia sẻ</span>
-        </li>
-        <li class="mdc-list-item" role="menuitem">
-            <div class="material-icons" style="color: blue">movie</div>
-            <span class="mdc-list-item__text" style="padding-left: 15px;">Phim</span>
-        </li>
-        <li class="mdc-list-item" role="menuitem">
-            <div class="material-icons" style="color: blue">filter_none</div>
-            <span class="mdc-list-item__text" style="padding-left: 15px;">Hoạt ảnh</span>
-        </li>
-        <li class="mdc-list-item" role="menuitem">
-            <div class="material-icons" style="color: blue">web</div>
-            <span class="mdc-list-item__text" style="padding-left: 15px;">Ảnh ghép</span>
+            <div class="material-icons" style="color: blue">input</div>
+            <span class="mdc-list-item__text" style="padding-left: 15px;<?php Yii::$app->user->logout(); ?>">Đăng xuất</span>
         </li>
     </ul>
 </div>
@@ -75,11 +84,16 @@ use yii\helpers\Html;
     menu.hoistMenuToBody(); // Not required if the menu is already positioned on the body
     menu.setAbsolutePosition(1000, 50); //tạm thời set cứng
     menu.open = false;
-
-    function myFunction() {
-        menu.open = !menu.open;
+    function addBox() {
+       var add =  document.getElementById('addbox');
+       add = menu.open = !menu.open;
+    }
+    function account() {
+        var acc = document.getElementById('account');
+        add = menu.open = !menu.open;
     }
 </script>
+
 <!--<script type="text/javascript">-->
 <!--    window.onload = function () {-->
 <!--        var fileupload = document.getElementById("FileUpload");-->
