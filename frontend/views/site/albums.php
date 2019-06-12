@@ -4,9 +4,6 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 ?>
-<head>
-    <link rel="stylesheet" href="<?php echo Yii::$app->homeUrl?>css/style.css">
-</head>
 <style>
     * {
         box-sizing: border-box;
@@ -96,7 +93,7 @@ use yii\helpers\Html;
 
     .container:hover .overlay {
         opacity: 1;
-    }
+    }  
 </style>
 <!--style="overflow-x: hidden;"-->
 <body >
@@ -135,40 +132,39 @@ use yii\helpers\Html;
 
             <?php ActiveForm::end(); ?>
 
-            <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction2()">account_circle</a>
+            <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunction2()">account_circle</a>
         </section>
     </div>
 </header>
 
-<div class="main-content">
-    <span class="mdc-typography mdc-typography--heading6" style="padding-left: 10px;color: blue"><b>ALBUM</b></span>
-    <div class="row">
-        <div class="column">
-            <a href="<?php echo Yii::$app->homeUrl.'album/addnew'?>" style="text-decoration: none;color: black">
-                <img src="<?php echo Yii::$app->homeUrl."frontend/web/uploads/add.png"?>" class="image">
-                <span class="mdc-typography--subtitle2"><b>Tạo album</b></span>
+<span class="mdc-typography mdc-typography--heading6" style="padding-left: 10px;color: blue"><b>ALBUM</b></span>
+<div class="row">
+    <div class="column">
+        <a href="#" style="text-decoration: none;color: black">
+            <img src="<?php echo Yii::$app->homeUrl."frontend/web/uploads/add.png"?>" class="image">
+            <span class="mdc-typography--subtitle2"><b>Tạo album</b></span>
+        </a>
+    </div>
+    <?php
+    foreach ($albums as $key =>$value) {
+        ?>
+        <div class="column " style="padding: 5px">
+            <a href="#" style="text-decoration: none;color: black;">
+                <div class="container">
+                    <img src="<?php echo Yii::$app->homeUrl."frontend/web/uploads/5aeb1f62f6cd496dc81c07d58b82f143.jpg"?>" class="image">
+                    <div class="overlay">
+                        <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunctionAlbum()">more_vert</a>
+                    </div>
+                </div>
+                <span class="mdc-typography--subtitle2"><b><?php echo $value["title"];?></b></span>
             </a>
+            
         </div>
         <?php
-        foreach ($albums as $key =>$value) {
-            ?>
-            <div class="column " style="padding: 5px">
-                <a href="#" style="text-decoration: none;color: black;">
-                    <div class="container">
-                        <img src="<?php echo Yii::$app->homeUrl."frontend/web/uploads/5aeb1f62f6cd496dc81c07d58b82f143.jpg"?>" class="image">
-                        <div class="overlay">
-                            <a class="material-icons mdc-top-app-bar__action-item" aria-label="User" onclick="myFunctionAlbum()">more_vert</a>
-                        </div>
-                    </div>
-                    <span class="mdc-typography--subtitle2"><b><?php echo $value["title"];?></b></span>
-                </a>
-                
-            </div>
-            <?php
-        }
-        ?>
-    </div>
+    }
+    ?>
 </div>
+
 <!-- menu album -->
 <div class="mdc-menu mdc-menu-album mdc-menu-surface">
     <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">

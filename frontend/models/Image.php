@@ -1,7 +1,6 @@
 <?php
 
 namespace frontend\models;
-
 use Yii;
 
 /**
@@ -54,7 +53,7 @@ class Image extends \yii\db\ActiveRecord
         return [
             'image_id' => 'Image ID',
             'user_id' => 'User ID',
-            'image' => 'Image',
+            'image' => 'Tải lên',
             'path_image' => 'Path Image',
             'description' => 'Description',
             'location' => 'Location',
@@ -80,6 +79,7 @@ class Image extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+
     public function getOneImage($id){
         $data = Image::find()
             ->asArray()
@@ -88,11 +88,32 @@ class Image extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public function  getImage(){
-        $data = Image::find()
-            ->asArray()
-            ->where(['user_id'=>Yii::$app->user->id,'deleted'=>0])
-            ->all();
-        return $data;
+    public function deleteImage($id){
+        $data = Image::findOne($id);
+        // echo '<pre>';
+        // print_r($delete);
+        // die();
+        $data->deleted =1;
+        $data->update();
+    }
+
+    public function deleteAllTrash(){
+
+        Image::deleteAll([
+            'user_id'=>Yii::$app->user->id,
+            'deleted'=>1
+        ]);
+
+        // $models = Image::find()
+        // ->where([
+        //     'user_id'=>Yii::$app->user->id,
+        //     'deleted'=>1
+        // ])
+        // ->all();
+        // foreach ($models as $model) {
+        //      $model->delete();
+        //     }
     }
 }
+
+?>

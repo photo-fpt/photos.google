@@ -2,17 +2,13 @@
 
 use app\widgets\Alert;
 use frontend\assets\AppAsset;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use app\widgets\categoryWidget;
 use app\widgets\contentWidget;
 use app\widgets\headermainWidget;
 use app\widgets\menuhideWidget;
-AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -26,36 +22,26 @@ AppAsset::register($this);
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="<?php echo Yii::$app->homeUrl ?>css/style.css">
+    <link rel="stylesheet" href="<?php echo Yii::$app->homeUrl?>css/style.css">
+    <link rel="stylesheet" href="<?php echo Yii::$app->homeUrl?>js/fun.js">
 
 </head>
 <body>
 <?php $this->beginBody() ?>
 
-<?php
-if (Yii::$app->user->isGuest) {
-    echo 'chưa dang nhap';
-} else {
-    echo menuhideWidget::widget();
+    <?= menuhideWidget::widget(); ?>
 
-?>
-    <div class="mdc-drawer-scrim "></div>
+<div class="mdc-drawer-scrim "></div>
 <div class="mdc-drawer-app-content">
-    <?php
 
-    echo headermainWidget::widget();
 
-    echo categoryWidget::widget();
-    ?>
-    <main class="main-content" id="main-content">
+    <?= categoryWidget::widget(); ?>
+    
+    <main id="main-content">
 
-        <?= $content ?>
+        <?=$content?>
 
     </main>
-    <?php
-    }
-    ?>
-
 </div>
 
 <script>

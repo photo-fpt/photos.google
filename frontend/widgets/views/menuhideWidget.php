@@ -9,11 +9,11 @@
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">image</i>
                 <span class="mdc-list-item__text">Ảnh</span>
             </a>
-            <a class="mdc-list-item" href="<?= Yii::$app->homeUrl."albums" ?>">
+            <a class="mdc-list-item" href="<?= Yii::$app->homeUrl."album" ?>">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">collections_bookmark</i>
                 <span class="mdc-list-item__text">Album</span>
             </a>
-            <a class="mdc-list-item" href="<?= Yii::$app->homeUrl."sharing" ?>">
+            <a class="mdc-list-item" href="<?= Yii::$app->homeUrl."share" ?>">
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">share</i>
                 <span class="mdc-list-item__text">Chia sẻ</span>
             </a>

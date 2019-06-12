@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use common\models\User;
 use frontend\models\Image;
+use frontend\models\Album;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -16,13 +17,14 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\UploadedFile;
+
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
-
     /**
      * {@inheritdoc}
      */
@@ -69,26 +71,44 @@ class SiteController extends Controller
             ],
         ];
     }
-
-    /**
-     * Displays homepage.
-     *
-     * @return mixed
-     */
-
     public function actionIndex()
     {
+        $model = new Image();
         if (!Yii::$app->user->isGuest){
-            $data = new Image();
-            $data = $data->getImage();
-            return $this->render('index',['image'=>$data]);
+            $data = Image::find()
+                ->where(['user_id'=>Yii::$app->user->id,'deleted'=>0])
+                ->all();
+            if ($model->load(Yii::$app->request->post())) {
+                $names = UploadedFile::getInstances($model, 'image');
+                if (count($names)>5) {
+                    return $this->redirect(Yii::$app->homeUrl);
+                }
+                foreach ($names as $name) {
+                    $path = 'uploads/' . md5($name->baseName) . '.' . $name->extension;
+                    if ($name->saveAs($path)) {
+                        date_default_timezone_set('Asia/Ho_Chi_Minh');
+                        $date = date('Y-m-d H:i:s');
+                        $filename = $name->baseName . '.' . $name->extension;
+                        $filepath = $path;
+                        $username = Yii::$app->user->identity->id;
+                        Yii::$app->db->createCommand()->insert('image',['user_id'=>$username,'image'=>$filename,'path_image'=>$filepath,'date_create'=>$date,'date_update'=>$date])->execute();
+                    }
+
+                }
+                return $this->redirect(Yii::$app->homeUrl);
+            }
+            else{
+                return $this->render('index',[
+                    'image'=>$data,
+                    'model'=>$model
+                ]);
+            }
         }
         else{
             $this->layout = 'login';
-            return $this->redirect(Yii::$app->homeUrl.'login');
+            return $this->redirect(Yii::$app->homeUrl . 'login');
         }
     }
-
     /**
      * Logs in a user.
      *
@@ -96,7 +116,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        $this->layout ='login';
+        $this->layout = 'login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -125,11 +145,18 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return mixed
-     */
+    public function actionWistlist($id){
+        $wist = Image::findOne($id);
+        if ($wist->wistlist ==0){
+            $wist->wistlist = 1;
+            $wist->update();
+        }
+        else{
+            $wist->wistlist = 0;
+            $wist->update();
+        }
+        return $this->redirect(Yii::$app->homeUrl.'image/detail?id='.$id);
+    }
     public function actionContact()
     {
         $model = new ContactForm();

@@ -76,4 +76,5 @@ class Album extends \yii\db\ActiveRecord
     {
         return $this->hasMany(AlbumImage::className(), ['album_id' => 'album_id']);
     }
+
 }

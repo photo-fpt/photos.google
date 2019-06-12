@@ -32,21 +32,13 @@ class headermainWidget extends Widget
                     $date = date('Y-m-d H:i:s');
                     $filename = $name->baseName . '.' . $name->extension;
                     $filepath = $path;
-                    $username = Yii::$app->user->identity->getId();
-//                    echo '<pre>';
-//                    print_r($username);
-//                    die();
-                    Yii::$app->db->createCommand()->insert('image',
-                        ['user_id'=>$username,'image'=>$filename,'path_image'=>$filepath,'date_create'=>$date,
-                        'date_update'=>$date])->execute();
+                    $username = Yii::$app->user->identity->id;
+                    Yii::$app->db->createCommand()->insert('image',['user_id'=>$username,'image'=>$filename,'path_image'=>$filepath,'date_create'=>$date,'date_update'=>$date])->execute();
                 }
 
             }
-
         }
-        return $this->render('headermainWidget', [
-            'model' => $model,
-        ]);
+        return $this->render('headermainWidget', ['model' => $model]);
     }
 
     public function actionUpdate($id){

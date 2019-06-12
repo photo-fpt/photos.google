@@ -66,7 +66,7 @@ use app\widgets\headerdetailWidget;
                 <div class="mdc-notched-outline">
                     <div class="mdc-notched-outline__leading"></div>
                     <div class="mdc-notched-outline__notch">
-                        <label for="my-input" class="mdc-floating-label" style="color: #CDCDCD;" >Tìm kiếm ảnh của bạn</label>
+                        
                     </div>
                     <div class="mdc-notched-outline__trailing"></div>
                 </div>
@@ -79,28 +79,15 @@ use app\widgets\headerdetailWidget;
         </section>
     </div>
 </header>
+
 <div class="mdc-elevation--z4">
     <ul class="mdc-list">
-        <li class="mdc-list-item" tabindex="0">
+        <?php foreach ($albums as $key => $value): ?>
+            <li class="mdc-list-item" tabindex="0">
             <span class="mdc-list-item__graphic material-icons">star_border</span>
-            Ảnh yêu thích
+            <?php echo $value["title"] ?>
         </li>
-        <li class="mdc-list-item" tabindex="0">
-            <span class="mdc-list-item__graphic material-icons">star_border</span>
-            Ảnh yêu thích
-        </li>
-        <li class="mdc-list-item" tabindex="0">
-            <span class="mdc-list-item__graphic material-icons">star_border</span>
-            Ảnh yêu thích
-        </li>
-        <li class="mdc-list-item" tabindex="0">
-            <span class="mdc-list-item__graphic material-icons">star_border</span>
-            Ảnh yêu thích
-        </li>
-        <li class="mdc-list-item" tabindex="0">
-            <span class="mdc-list-item__graphic material-icons">star_border</span>
-            Ảnh yêu thích
-        </li>
+        <?php endforeach ?>  
     </ul>
 </div>
 
