@@ -114,6 +114,16 @@ class Image extends \yii\db\ActiveRecord
         //      $model->delete();
         //     }
     }
+    public function deleteSelectTrash($id){
+        $data = Image::findOne($id);
+        $data->delete();
+    }
+
+    public function redeleteTrash($id){    
+        $data = Image::findOne($id);   
+        $data->deleted =0;
+        $data->update();
+    }
 }
 
 ?>

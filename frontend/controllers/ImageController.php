@@ -11,7 +11,12 @@ class ImageController extends \yii\web\Controller
     {
         $data = new Image();
         $data = $data->getOneImage($id);
-        return $this->renderPartial('detail',['data'=>$data]);
+        $user_id = Yii::$app->user->id;
+        $data2 = Image::find()->where('image_id!=:id AND user_id=:user_id',['id'=>$id,'user_id'=>$user_id])->all();
+        return $this->renderPartial('detail',[
+            'data'=>$data,
+            'data2'=>$data2
+        ]);
     }
     public function actionDelete($id){
         $data = new Image();
@@ -36,5 +41,23 @@ class ImageController extends \yii\web\Controller
     //     	$this->goHome();
     //     }
     // }
+    public function actionSend(){
+        if (isset($_POST['submit'])){
+            $name =$_POST['share'];
+            $mes = $_POST['mes'];
+            Yii::$app->mailer->compose()
+                ->setFrom('dinhtranqt95@gmail.com')
+                ->setTo($name)
+                ->setSubject($mes)
+                ->send();
+            return $this->redirect(Yii::$app->homeUrl);
+        }
 
+    }
+    public function actionArchive($id){
+        $data = Image::findOne($id);
+        $data->deleted = 2;
+        $data->save();
+        return $this->redirect(Yii::$app->homeUrl);
+    }
 }

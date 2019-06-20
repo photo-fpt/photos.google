@@ -192,6 +192,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+        $this->layout = 'signup';
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             $identity = User::findOne(['username' => $model->username]);
